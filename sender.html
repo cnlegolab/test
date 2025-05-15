@@ -9,27 +9,48 @@
             font-family: Arial, sans-serif;
             margin-top: 50px;
         }
+        h1 {
+            font-size: 26px;
+            color: #333;
+        }
+        h3 {
+            font-size: 22px;
+            color: #d9534f;
+        }
         #password {
-            font-size: 24px;
+            font-size: 28px;
             margin: 20px;
             color: green;
         }
         button {
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
         }
     </style>
 </head>
 <body>
-    <h2>안전한 음식 배달을 위해 암호를 생성하세요</h2>
+    <h1>🍔 음식배달을 위해 주문자에게 암호를 생성하여 전달하세요.</h1>
+    <h3>⚠️ 주의: 배달라이더에게 생성된 암호를 알려주시면 안 됩니다.</h3>
     <button onclick="generatePassword()">암호 생성</button>
     <div id="password">암호가 여기에 표시됩니다.</div>
 
     <script>
         function generatePassword() {
             const password = Math.floor(1000 + Math.random() * 9000); 
-            localStorage.setItem("deliveryPassword", password);
-            document.getElementById("password").innerText = "생성된 암호: " + password;
+            const link = `receiver.html?password=${password}`;
+            document.getElementById("password").innerHTML = `
+                생성된 암호: ${password} <br>
+                <a href="${link}" target="_blank">암호 입력 페이지로 이동</a>
+            `;
+            alert(`생성된 암호는 ${password}입니다. 고객에게 전달하세요.`);
         }
     </script>
 </body>

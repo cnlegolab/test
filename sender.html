@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>암호 생성기</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+        #password {
+            font-size: 24px;
+            margin: 20px;
+            color: green;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>안전한 음식 배달을 위해 암호를 생성하세요</h2>
+    <button onclick="generatePassword()">암호 생성</button>
+    <div id="password">암호가 여기에 표시됩니다.</div>
+
+    <script>
+        function generatePassword() {
+            const password = Math.floor(1000 + Math.random() * 9000); 
+            localStorage.setItem("deliveryPassword", password);
+            document.getElementById("password").innerText = "생성된 암호: " + password;
+        }
+    </script>
+</body>
+</html>

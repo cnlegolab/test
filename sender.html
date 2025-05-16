@@ -44,13 +44,10 @@
 
     <script>
         function generatePassword() {
-            const password = Math.floor(1000 + Math.random() * 9000); 
-            const link = `receiver.html?password=${password}`;
-            document.getElementById("password").innerHTML = `
-                생성된 암호: ${password} <br>
-                <a href="${link}" target="_blank">암호 입력 페이지로 이동</a>
-            `;
-            alert(`생성된 암호는 ${password}입니다. 고객에게 전달하세요.`);
+            const password = Math.floor(1000 + Math.random() * 9000);
+            localStorage.setItem("deliveryPassword", password);
+            document.getElementById("password").innerText = "생성된 암호: " + password;
+            alert("생성된 암호는 " + password + "입니다. 주문자에게 문자로 전달하세요.");
         }
     </script>
 </body>

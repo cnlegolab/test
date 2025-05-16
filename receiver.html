@@ -36,6 +36,20 @@
             font-size: 20px;
             color: #333;
         }
+        #downloadButton {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        #downloadButton:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -43,23 +57,17 @@
     <input type="text" id="inputPassword" placeholder="암호 입력">
     <button onclick="checkPassword()">확인</button>
     <div id="message"></div>
+    <a id="downloadButton" href="https://play.google.com/store/apps/details?id=com.lego.retail.mindstorms" target="_blank">
+        배달보안클립해제
+    </a>
 
     <script>
-        // 페이지 로드 시 암호 자동 팝업
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const correctPassword = urlParams.get("password");
-            if (correctPassword) {
-                alert(`암호가 전달되었습니다: ${correctPassword}`);
-            }
-        };
-
         function checkPassword() {
             const inputPassword = document.getElementById("inputPassword").value;
-            const urlParams = new URLSearchParams(window.location.search);
-            const correctPassword = urlParams.get("password");
+            const storedPassword = localStorage.getItem("deliveryPassword");
+            const downloadButton = document.getElementById("downloadButton");
 
-            if (inputPassword === correctPassword) {
+            if (inputPassword === storedPassword) {
                 document.getElementById("message").innerHTML = `
                     ✅ 고객님의 소중한 주문은 암호화된 클립보안장치를 통해 안전하게 배달되었습니다. <br><br>
                     안심하고 맛있게 즐겨주세요! <br><br>
@@ -68,8 +76,10 @@
                     🍽️ 맛있게 드시고, 언제나 건강하세요! <br>
                     감사합니다. 💕
                 `;
+                downloadButton.style.display = "inline-block";
             } else {
                 document.getElementById("message").innerText = "❌ 암호가 틀렸습니다. 다시 확인하세요.";
+                downloadButton.style.display = "none";
             }
         }
     </script>

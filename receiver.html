@@ -36,7 +36,7 @@
             font-size: 20px;
             color: #333;
         }
-        #downloadButton {
+        #smartClipButton {
             display: none;
             margin-top: 20px;
             font-size: 18px;
@@ -47,7 +47,7 @@
             text-decoration: none;
             border-radius: 5px;
         }
-        #downloadButton:hover {
+        #smartClipButton:hover {
             background-color: #0056b3;
         }
     </style>
@@ -57,15 +57,30 @@
     <input type="text" id="inputPassword" placeholder="암호 입력">
     <button onclick="checkPassword()">확인</button>
     <div id="message"></div>
-    <a id="downloadButton" href="https://play.google.com/store/apps/details?id=com.lego.retail.mindstorms" target="_blank">
-        배달보안클립해제
+    <a id="smartClipButton" href="https://play.google.com/store/apps/details?id=com.lego.retail.mindstorms" target="_blank">
+        🔓 스마트클립 해제
     </a>
 
     <script>
+        window.onload = function() {
+            const storedPassword = localStorage.getItem("deliveryPassword");
+            if (storedPassword) {
+                document.getElementById("message").innerText = "✅ 암호가 생성되었습니다. 입력하세요.";
+            } else {
+                document.getElementById("message").innerText = "❌ 암호가 생성되지 않았습니다. 생성 페이지에서 암호를 생성하세요.";
+            }
+        };
+
         function checkPassword() {
             const inputPassword = document.getElementById("inputPassword").value;
             const storedPassword = localStorage.getItem("deliveryPassword");
-            const downloadButton = document.getElementById("downloadButton");
+            const smartClipButton = document.getElementById("smartClipButton");
+
+            if (!storedPassword) {
+                document.getElementById("message").innerText = "❌ 암호가 생성되지 않았습니다. 생성 페이지에서 암호를 생성하세요.";
+                smartClipButton.style.display = "none";
+                return;
+            }
 
             if (inputPassword === storedPassword) {
                 document.getElementById("message").innerHTML = `
@@ -76,10 +91,10 @@
                     🍽️ 맛있게 드시고, 언제나 건강하세요! <br>
                     감사합니다. 💕
                 `;
-                downloadButton.style.display = "inline-block";
+                smartClipButton.style.display = "inline-block";
             } else {
                 document.getElementById("message").innerText = "❌ 암호가 틀렸습니다. 다시 확인하세요.";
-                downloadButton.style.display = "none";
+                smartClipButton.style.display = "none";
             }
         }
     </script>

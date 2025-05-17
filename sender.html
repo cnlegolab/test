@@ -44,10 +44,10 @@
 
     <script>
         function generatePassword() {
-            const password = Math.floor(1000 + Math.random() * 9000);
-            localStorage.setItem("deliveryPassword", password);
+            const password = Math.floor(1000 + Math.random() * 9000); // 4자리 랜덤 숫자 생성
+            localStorage.setItem("deliveryPassword", password); // LocalStorage에 암호 저장
             document.getElementById("password").innerText = "생성된 암호: " + password;
-            alert("생성된 암호는 " + password + "입니다. 주문자에게 문자로 전달하세요.");
+            alert("생성된 암호는 " + password + "입니다. 주문자에게 전달하세요.");
         }
     </script>
 </body>
